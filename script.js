@@ -8,7 +8,7 @@ const divide = (a, b) => a / b;
 
 let num1 = null;
 let num2 = null;
-let temp;
+let doMath;
 let screenNumber;
 let numbers = [];
 let total;
@@ -18,14 +18,14 @@ let btn__num;
 const reset = () => {
   num1 = null;
   num2 = null;
-  temp = '';
+  doMath = '';
   screenNumber;
   numbers = [];
   total;
 };
 const operate = (num1, num2) => {
   let result;
-  switch (temp) {
+  switch (doMath) {
     case add:
       result = add(num1, num2);
       break;
@@ -66,17 +66,17 @@ btn__numbers.forEach((button) => {
 });
 
 document.querySelector('.add').addEventListener('click', () => {
-  temp = add;
+  doMath = add;
   finished ?? reset();
   calc();
 });
 document.querySelector('.subtract').addEventListener('click', () => {
-  temp = subtract;
+  doMath = subtract;
   finished ?? reset();
   calc();
 });
 document.querySelector('.multiply').addEventListener('click', () => {
-  temp = multiply;
+  doMath = multiply;
   finished ?? reset();
   calc();
 });
@@ -97,4 +97,14 @@ document.querySelector('.equals').addEventListener('click', () => {
     num2 = null;
   }
   reset();
+});
+
+document.querySelector('.clear').addEventListener('click', () => {
+  reset();
+  screen.textContent = '';
+});
+document.querySelector('.back').addEventListener('click', () => {
+  numbers.pop();
+  screenNumber = Number(numbers.join(''));
+  screen.textContent = screenNumber;
 });
