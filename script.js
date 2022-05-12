@@ -1,5 +1,5 @@
 `use strict:`;
-
+const screen = document.querySelector('.screen--txt');
 const add = (a, b) => a + b;
 
 const subtract = (a, b) => a - b;
@@ -7,9 +7,9 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 
 const divide = (a, b) => a / b;
-let num1 = 2;
-let num2 = 3;
-let temp = multiply;
+let num1 = null;
+let num2 = null;
+let temp;
 const operate = (num1, num2) => {
   let result;
   switch (temp) {
@@ -25,5 +25,36 @@ const operate = (num1, num2) => {
   }
   return result;
 };
+let screenNumber;
+let numbers = [];
+let total;
+document.querySelector('.number1').addEventListener('click', () => {
+  numbers.push(1);
+  screenNumber = Number(numbers.join(''));
+  screen.textContent = screenNumber;
+});
+document.querySelector('.number2').addEventListener('click', () => {
+  numbers.push(2);
+  screenNumber = Number(numbers.join(''));
+  screen.textContent = screenNumber;
+});
 
-console.log(operate(3, 2));
+document.querySelector('.add').addEventListener('click', () => {
+  temp = add;
+  if (num1 === null) {
+    num1 = screenNumber;
+  } else if (num1 !== null) {
+    num2 = screenNumber;
+  }
+  numbers = [];
+  screenNumber = null;
+  console.log(`This is number one:${num1}`);
+  console.log(`This is number two:${num2}`);
+});
+
+document.querySelector('.equals').addEventListener('click', () => {
+  num2 = screenNumber;
+  total = operate(num1, num2);
+  screen.textContent = total;
+  num1 = total;
+});

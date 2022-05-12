@@ -1,0 +1,30 @@
+.main-container {
+  height: 500px;
+  width: 500px;
+}
+
+.calculator {
+  display: grid;
+  grid-template-rows: 100px 400px;
+  border: 1px solid black;
+  padding: 1rem;
+}
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+  margin-bottom: 1rem;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+.equals {
+  grid-column: 1/6;
+}
+/* button {
+  height: 75px;
+  width: 75px;
+} */
