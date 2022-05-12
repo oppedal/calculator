@@ -10,6 +10,9 @@ const divide = (a, b) => a / b;
 let num1 = null;
 let num2 = null;
 let temp;
+let screenNumber;
+let numbers = [];
+let total;
 const operate = (num1, num2) => {
   let result;
   switch (temp) {
@@ -25,9 +28,7 @@ const operate = (num1, num2) => {
   }
   return result;
 };
-let screenNumber;
-let numbers = [];
-let total;
+
 document.querySelector('.number1').addEventListener('click', () => {
   numbers.push(1);
   screenNumber = Number(numbers.join(''));
@@ -45,11 +46,25 @@ document.querySelector('.add').addEventListener('click', () => {
     num1 = screenNumber;
   } else if (num1 !== null) {
     num2 = screenNumber;
+    let sum = operate(num1, num2);
+    num1 = sum;
+    screen.textContent = num1;
   }
   numbers = [];
   screenNumber = null;
-  console.log(`This is number one:${num1}`);
-  console.log(`This is number two:${num2}`);
+});
+document.querySelector('.subtract').addEventListener('click', () => {
+  temp = subtract;
+  if (num1 === null) {
+    num1 = screenNumber;
+  } else if (num1 !== null) {
+    num2 = screenNumber;
+    let sum = operate(num1, num2);
+    num1 = sum;
+    screen.textContent = num1;
+  }
+  numbers = [];
+  screenNumber = null;
 });
 
 document.querySelector('.equals').addEventListener('click', () => {
