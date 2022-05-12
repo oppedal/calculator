@@ -1,11 +1,9 @@
 `use strict:`;
 const screen = document.querySelector('.screen--txt');
+const btn__numbers = document.querySelectorAll('button');
 const add = (a, b) => a + b;
-
 const subtract = (a, b) => a - b;
-
 const multiply = (a, b) => a * b;
-
 const divide = (a, b) => a / b;
 
 let num1 = null;
@@ -15,6 +13,8 @@ let screenNumber;
 let numbers = [];
 let total;
 let finished = false;
+let btn__num;
+
 const reset = () => {
   num1 = null;
   num2 = null;
@@ -54,50 +54,15 @@ const calc = () => {
   screenNumber = null;
 };
 
-document.querySelector('.number--1').addEventListener('click', () => {
-  numbers.push(1);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--2').addEventListener('click', () => {
-  numbers.push(2);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--3').addEventListener('click', () => {
-  numbers.push(3);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--4').addEventListener('click', () => {
-  numbers.push(4);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--5').addEventListener('click', () => {
-  numbers.push(5);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--6').addEventListener('click', () => {
-  numbers.push(6);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--7').addEventListener('click', () => {
-  numbers.push(7);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--8').addEventListener('click', () => {
-  numbers.push(8);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
-});
-document.querySelector('.number--9').addEventListener('click', () => {
-  numbers.push(9);
-  screenNumber = Number(numbers.join(''));
-  screen.textContent = screenNumber;
+btn__numbers.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    btn__num = e.target;
+    if (btn__num.classList.contains('numbers')) {
+      numbers.push(btn__num.classList[0]);
+      screenNumber = Number(numbers.join(''));
+      screen.textContent = screenNumber;
+    }
+  });
 });
 
 document.querySelector('.add').addEventListener('click', () => {
