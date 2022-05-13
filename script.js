@@ -9,21 +9,17 @@ const divide = (a, b) => a / b;
 let num1 = null;
 let num2 = null;
 let doMath;
-let screenNumber;
-let screenNumberTwo;
 let numbersOne = [];
 let numbersTwo = [];
 let total;
 let finished = false;
 let btn__num;
 let mem = null;
-let sum = null;
 
 const reset = () => {
   num1 = null;
   num2 = null;
   doMath = '';
-  screenNumber;
   numbers = [];
   total;
 };
@@ -70,14 +66,17 @@ const calc = () => {
     num1 = screenNumber;
     if (num1 !== null) {
       num2 = screenNumberTwo;
-      sum = operate(num1, num2);
-      mem = sum;
-      console.log(sum);
+      mem = operate(num1, num2);
     }
+  } else if (mem !== null) {
+    screen.textContent = mem;
+    num1 = mem;
+    num2 = null;
+    screen.textContent = mem;
+    console.log(`mem: ${mem} num1: ${num1} num2: ${num2}`);
   }
 
   numbersOne = [];
-  screenNumber = null;
 };
 
 btn__numbers.forEach((button) => {
@@ -86,24 +85,9 @@ btn__numbers.forEach((button) => {
     if (btn__num.classList.contains('numbers')) {
       if (mem === null) {
         numbersOne.push(btn__num.classList[0]);
-
-        screenNumber = Number(numbersOne.join(''));
-        num1 = screenNumber;
-        screen.textContent = screenNumber;
-        // console.log(`First array: ${numbersOne}`);
-        // console.log(`This is num1: ${num1}`);
-      } else if (num1 !== null) {
-        numbersTwo.push(btn__num.classList[0]);
-
-        screenNumberTwo = Number(numbersTwo.join(''));
-        num2 = screenNumberTwo;
-        screen.textContent = screenNumberTwo;
-        mem = operate(num1, num2);
-        console.log(`mem: ${mem} num1: ${num1} num2: ${num2}`);
-        // console.log(`Second array: ${numbersTwo}`);
-        // console.log(`This is num2: ${num2}`);
-      } else {
-        console.log(mem);
+        num1 = Number(numbersOne.splice(''));
+        screen.textContent = num1;
+        console.log(num1);
       }
     }
   });
