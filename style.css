@@ -71,6 +71,9 @@ button {
   /* width: 90px;
   height: 59px; */
 }
+.btn-0 {
+  grid-area: 5 / 1 / 6 / 2;
+}
 .btn-1 {
   grid-area: 4 / 1 / 5 / 2;
 }
@@ -129,7 +132,7 @@ button {
   background-color: #c84d5e;
 }
 .btn-equals {
-  grid-area: 5 / 1 / 6 / 4;
+  grid-area: 5 / 2 / 6 / 4;
   color: #fae43a;
   background-color: #c84d5e;
 }

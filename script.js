@@ -10,10 +10,14 @@ let num1 = null;
 let num2 = null;
 let doMath;
 let screenNumber;
-let numbers = [];
+let screenNumberTwo;
+let numbersOne = [];
+let numbersTwo = [];
 let total;
 let finished = false;
 let btn__num;
+let mem = null;
+let sum = null;
 
 const reset = () => {
   num1 = null;
@@ -42,15 +46,37 @@ const operate = (num1, num2) => {
   return result;
 };
 const calc = () => {
-  if (num1 === null) {
+  // if (mem === null) {
+  //   if (num1 === null) {
+  //     num1 = screenNumber;
+  //   } else if (num1 !== null) {
+  //     num2 = screenNumber;
+
+  //     let sum = operate(num1, num2);
+  //     num1 = sum;
+  //     mem = num1;
+  //     console.log(mem);
+  //     screen.textContent = num1;
+  //   }
+  // } else {
+  //   num2 = screenNumber;
+  //   sum = operate(mem, num2);
+  // }
+  // if (num2 !== null && mem !== null) {
+  //   mem.shift();
+  //   console.log(mem);
+  // }
+  if (mem === null) {
     num1 = screenNumber;
-  } else if (num1 !== null) {
-    num2 = screenNumber;
-    let sum = operate(num1, num2);
-    num1 = sum;
-    screen.textContent = num1;
+    if (num1 !== null) {
+      num2 = screenNumberTwo;
+      sum = operate(num1, num2);
+      mem = sum;
+      console.log(sum);
+    }
   }
-  numbers = [];
+
+  numbersOne = [];
   screenNumber = null;
 };
 
@@ -58,26 +84,45 @@ btn__numbers.forEach((button) => {
   button.addEventListener('click', (e) => {
     btn__num = e.target;
     if (btn__num.classList.contains('numbers')) {
-      numbers.push(btn__num.classList[0]);
-      screenNumber = Number(numbers.join(''));
-      screen.textContent = screenNumber;
+      if (mem === null) {
+        numbersOne.push(btn__num.classList[0]);
+
+        screenNumber = Number(numbersOne.join(''));
+        num1 = screenNumber;
+        screen.textContent = screenNumber;
+        // console.log(`First array: ${numbersOne}`);
+        // console.log(`This is num1: ${num1}`);
+      } else if (num1 !== null) {
+        numbersTwo.push(btn__num.classList[0]);
+
+        screenNumberTwo = Number(numbersTwo.join(''));
+        num2 = screenNumberTwo;
+        screen.textContent = screenNumberTwo;
+        mem = operate(num1, num2);
+        console.log(`mem: ${mem} num1: ${num1} num2: ${num2}`);
+        // console.log(`Second array: ${numbersTwo}`);
+        // console.log(`This is num2: ${num2}`);
+      } else {
+        console.log(mem);
+      }
     }
   });
 });
 
 document.querySelector('.add').addEventListener('click', () => {
   doMath = add;
-  finished ?? reset();
+  // finished ?? reset();
   calc();
+  // console.log(`this is the total ${sum}`);
 });
 document.querySelector('.subtract').addEventListener('click', () => {
   doMath = subtract;
-  finished ?? reset();
+  // finished ?? reset();
   calc();
 });
 document.querySelector('.multiply').addEventListener('click', () => {
   doMath = multiply;
-  finished ?? reset();
+  // finished ?? reset();
   calc();
 });
 document.querySelector('.divide').addEventListener('click', () => {
@@ -87,12 +132,15 @@ document.querySelector('.divide').addEventListener('click', () => {
 });
 
 document.querySelector('.equals').addEventListener('click', () => {
+  // console.log(`this is the memory ${mem}`);
   finished = true;
   num2 = screenNumber;
   total = operate(num1, num2);
   screen.textContent = total;
   num1 = total;
   num2 = null;
+  // numbers.push(total);
+
   if (num2 === screenNumber) {
     num2 = null;
   }
@@ -104,7 +152,7 @@ document.querySelector('.clear').addEventListener('click', () => {
   screen.textContent = '';
 });
 document.querySelector('.back').addEventListener('click', () => {
-  numbers.pop();
-  screenNumber = Number(numbers.join(''));
+  numbersOne.pop();
+  screenNumber = Number(numbersOne.join(''));
   screen.textContent = screenNumber;
 });
