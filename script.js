@@ -109,7 +109,9 @@ document.querySelector('.divide').addEventListener('click', () => {
   }
 });
 
-document.querySelector('.equals').addEventListener('click', () => {});
+document.querySelector('.equals').addEventListener('click', () => {
+  screen.textContent = mem;
+});
 
 document.querySelector('.clear').addEventListener('click', () => {
   reset();
