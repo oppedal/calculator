@@ -1,6 +1,7 @@
 `use strict:`;
 const screen = document.querySelector('.screen--txt');
 const btn__numbers = document.querySelectorAll('button');
+const screenFont = document.getElementById(`screenfont`);
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
@@ -15,6 +16,8 @@ let total;
 let finished = false;
 let btn__num;
 let mem = null;
+let maxNum = [];
+let maxNumTwo = [];
 
 const reset = () => {
   num1 = null;
@@ -24,8 +27,11 @@ const reset = () => {
   numbersTwo = [];
   total;
   mem = null;
+  maxNum = [];
+  maxNumTwo = [];
 };
 const operate = (num1, num2) => {
+  maxNum = [];
   let result;
   switch (doMath) {
     case add:
@@ -47,15 +53,14 @@ const calc = () => {
   if (mem === null) {
     if (num1 !== null) {
       mem = operate(num1, num2);
-      console.log(`calc mem if mem IS null = ${mem}`);
     }
   } else if (mem !== null) {
     num1 = mem;
 
     // mem = operate(num1, num2);
     screen.textContent = mem;
-    console.log(`calc mem if mem is not null = ${mem}`);
   }
+
   numbersTwo = [];
   numbersOne = [];
 };
@@ -69,13 +74,16 @@ btn__numbers.forEach((button) => {
         num1 = Number(numbersOne.join(''));
         screenNumber = num1;
         screen.textContent = num1;
-        console.log(num1);
+        console.log(`maxnum: ${maxNum}`);
+        maxNum.push(btn__num.classList[0]);
+        scaleFontSize(maxNum);
       } else if (num1 !== null) {
         numbersTwo.push(btn__num.classList[0]);
         num2 = Number(numbersTwo.join(''));
         screen.textContent = num2;
         mem = operate(num1, num2);
-        console.log(`mem after we input num2 = ${mem}`);
+        maxNumTwo.push(btn__num.classList[0]);
+        scaleFontSize(maxNumTwo);
       }
     }
   });
@@ -123,9 +131,23 @@ document.querySelector('.back').addEventListener('click', () => {
     mem = numbersOne.pop();
     screenNumber = Number(numbersOne.join(''));
     screen.textContent = screenNumber;
+    maxNum.pop();
   } else {
     numbersTwo.pop();
     screenNumber = Number(numbersTwo.join(''));
     screen.textContent = screenNumber;
+    maxNumTwo.pop();
   }
 });
+
+const scaleFontSize = (arr) => {
+  screenFont.style.fontSize = `3rem`;
+  if (arr.length >= 5) {
+    screenFont.style.fontSize = `2rem`;
+    if (arr.length >= 13) {
+      screenFont.style.fontSize = `1.5rem`;
+    }
+  } else if (arr.length === 0) {
+    screenFont.style.fontSize = `3rem`;
+  }
+};

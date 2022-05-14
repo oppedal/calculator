@@ -35,20 +35,34 @@
   box-shadow: 15px 0px 0px 0px #fae43a, 30px 0px 0px 0px #c84d5e;
 }
 .screen {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #97b6d6;
   border-radius: 22px;
   margin-bottom: 1rem;
-  height: 85%;
+  height: 150px;
+  width: 380px;
   box-shadow: 3px 0px 0px 0px inset rgba(0, 0, 0, 0.568);
 }
-h1 {
+.screen--txt {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--screenFont);
   font-weight: 900;
   font-size: 3rem;
   color: #c84d5e;
+  height: 150px;
+  width: 380px;
+  border-radius: 22px;
+  margin-bottom: 1rem;
 }
 .buttons {
   display: grid;
