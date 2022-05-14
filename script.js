@@ -18,6 +18,7 @@ let btn__num;
 let mem = null;
 let maxNum = [];
 let maxNumTwo = [];
+let symbol;
 
 const reset = () => {
   num1 = null;
@@ -50,8 +51,12 @@ const operate = (num1, num2) => {
   return result;
 };
 const calc = () => {
+  screen.textContent = ``;
   if (mem === null) {
+    console.log((screen.textContent = `${num1} ${symbol}`));
+    console.log(symbol);
     if (num1 !== null) {
+      screen.textContent = `${num1} ${symbol} `;
       mem = operate(num1, num2);
     }
   } else if (mem !== null) {
@@ -74,16 +79,20 @@ btn__numbers.forEach((button) => {
         num1 = Number(numbersOne.join(''));
         screenNumber = num1;
         screen.textContent = num1;
-        console.log(`maxnum: ${maxNum}`);
         maxNum.push(btn__num.classList[0]);
         scaleFontSize(maxNum);
       } else if (num1 !== null) {
         numbersTwo.push(btn__num.classList[0]);
         num2 = Number(numbersTwo.join(''));
-        screen.textContent = num2;
+
+        // screen.textContent = num2;
+        screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
         mem = operate(num1, num2);
         maxNumTwo.push(btn__num.classList[0]);
         scaleFontSize(maxNumTwo);
+      }
+      if (doMath === divide) {
+        console.log(`Divide`);
       }
     }
   });
@@ -91,30 +100,42 @@ btn__numbers.forEach((button) => {
 
 document.querySelector('.add').addEventListener('click', () => {
   doMath = add;
+  symbol = `+`;
   // finished ?? reset();
   calc();
   // console.log(`this is the total ${sum}`);
 });
 document.querySelector('.subtract').addEventListener('click', () => {
   doMath = subtract;
+  symbol = `-`;
   // finished ?? reset();
   calc();
 });
 document.querySelector('.multiply').addEventListener('click', () => {
   doMath = multiply;
+  symbol = `*`;
 
   // finished ?? reset();
   calc();
 });
 document.querySelector('.divide').addEventListener('click', () => {
   doMath = divide;
+  symbol = `/`;
+  numbersTwo.push(btn__num.classList[0]);
+  num2 = Number(numbersTwo.join(''));
+  // screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
+
+  console.log(num2);
+  console.log(`NumberOne arr = ${numbersOne}`);
+  console.log(`NumberTwo arr = ${numbersTwo}`);
+
   // num2 = screen.textContent;
   // finished ?? reset();
+  calc();
+  // if (num2 !== null) {
 
-  if (num2 !== null) {
-    calc();
-    screen.textContent = mem;
-  }
+  //   screen.textContent = mem;
+  // }
 });
 
 document.querySelector('.equals').addEventListener('click', () => {
@@ -127,7 +148,6 @@ document.querySelector('.clear').addEventListener('click', () => {
 });
 document.querySelector('.back').addEventListener('click', () => {
   if (mem === null) {
-    console.log(numbersOne);
     mem = numbersOne.pop();
     screenNumber = Number(numbersOne.join(''));
     screen.textContent = screenNumber;
@@ -141,7 +161,7 @@ document.querySelector('.back').addEventListener('click', () => {
 });
 
 const scaleFontSize = (arr) => {
-  screenFont.style.fontSize = `3rem`;
+  screenFont.style.fontSize = `3.2rem`;
   if (arr.length >= 5) {
     screenFont.style.fontSize = `2rem`;
     if (arr.length >= 13) {
