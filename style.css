@@ -41,7 +41,7 @@
   border-radius: 22px;
   margin-bottom: 1rem;
   height: 85%;
-  box-shadow: 3px 0px 0px 0px inset #fae43a;
+  box-shadow: 3px 0px 0px 0px inset rgba(0, 0, 0, 0.568);
 }
 h1 {
   font-family: var(--screenFont);
@@ -61,20 +61,26 @@ button {
   -webkit-box-shadow: 5px 0px 0px 0px #fae43a;
   box-shadow: 5px 0px 0px 0px #fae43a;
   cursor: pointer;
-  transform: 0.5 all;
+  transform: 1.2 all;
   transition: ease-in-out;
 }
-button:active {
-  -webkit-box-shadow: 0px 0px 0px 0px #fae43a;
-  box-shadow: 0px 0px 0px 0px #fae43a;
-  scale: 90%;
-}
+
 .numbers {
   color: #c84d5e;
   background-color: #fae43a;
   -webkit-box-shadow: 5px 0px 0px 0px #c84d5e;
   box-shadow: 5px 0px 0px 0px #c84d5e;
 }
+button:active {
+  -webkit-box-shadow: 2px 0px 0px 0px inset rgba(0, 0, 0, 0.199);
+  box-shadow: 2px 0px 0px 0px inset black;
+  scale: 90%;
+}
+/* .operators:active {
+  -webkit-box-shadow: 3px 0px 0px 0px inset #fae43a;
+  box-shadow: 3px 0px 0px 0px inset #fae43a;
+  scale: 90%;
+} */
 
 .btn-0 {
   grid-area: 5 / 1 / 6 / 2;

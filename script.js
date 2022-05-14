@@ -20,8 +20,10 @@ const reset = () => {
   num1 = null;
   num2 = null;
   doMath = '';
-  numbers = [];
+  numbersOne = [];
+  numbersTwo = [];
   total;
+  mem = null;
 };
 const operate = (num1, num2) => {
   let result;
@@ -42,40 +44,19 @@ const operate = (num1, num2) => {
   return result;
 };
 const calc = () => {
-  // if (mem === null) {
-  //   if (num1 === null) {
-  //     num1 = screenNumber;
-  //   } else if (num1 !== null) {
-  //     num2 = screenNumber;
-
-  //     let sum = operate(num1, num2);
-  //     num1 = sum;
-  //     mem = num1;
-  //     console.log(mem);
-  //     screen.textContent = num1;
-  //   }
-  // } else {
-  //   num2 = screenNumber;
-  //   sum = operate(mem, num2);
-  // }
-  // if (num2 !== null && mem !== null) {
-  //   mem.shift();
-  //   console.log(mem);
-  // }
   if (mem === null) {
-    num1 = screenNumber;
     if (num1 !== null) {
-      num2 = screenNumberTwo;
       mem = operate(num1, num2);
+      console.log(`calc mem if mem IS null = ${mem}`);
     }
   } else if (mem !== null) {
-    screen.textContent = mem;
     num1 = mem;
-    num2 = null;
-    screen.textContent = mem;
-    console.log(`mem: ${mem} num1: ${num1} num2: ${num2}`);
-  }
 
+    // mem = operate(num1, num2);
+    screen.textContent = mem;
+    console.log(`calc mem if mem is not null = ${mem}`);
+  }
+  numbersTwo = [];
   numbersOne = [];
 };
 
@@ -85,9 +66,16 @@ btn__numbers.forEach((button) => {
     if (btn__num.classList.contains('numbers')) {
       if (mem === null) {
         numbersOne.push(btn__num.classList[0]);
-        num1 = Number(numbersOne.splice(''));
+        num1 = Number(numbersOne.join(''));
+        screenNumber = num1;
         screen.textContent = num1;
         console.log(num1);
+      } else if (num1 !== null) {
+        numbersTwo.push(btn__num.classList[0]);
+        num2 = Number(numbersTwo.join(''));
+        screen.textContent = num2;
+        mem = operate(num1, num2);
+        console.log(`mem after we input num2 = ${mem}`);
       }
     }
   });
@@ -106,37 +94,36 @@ document.querySelector('.subtract').addEventListener('click', () => {
 });
 document.querySelector('.multiply').addEventListener('click', () => {
   doMath = multiply;
+
   // finished ?? reset();
   calc();
 });
 document.querySelector('.divide').addEventListener('click', () => {
-  temp = divide;
-  finished ?? reset();
-  calc();
-});
+  doMath = divide;
+  // num2 = screen.textContent;
+  // finished ?? reset();
 
-document.querySelector('.equals').addEventListener('click', () => {
-  // console.log(`this is the memory ${mem}`);
-  finished = true;
-  num2 = screenNumber;
-  total = operate(num1, num2);
-  screen.textContent = total;
-  num1 = total;
-  num2 = null;
-  // numbers.push(total);
-
-  if (num2 === screenNumber) {
-    num2 = null;
+  if (num2 !== null) {
+    calc();
+    screen.textContent = mem;
   }
-  reset();
 });
+
+document.querySelector('.equals').addEventListener('click', () => {});
 
 document.querySelector('.clear').addEventListener('click', () => {
   reset();
   screen.textContent = '';
 });
 document.querySelector('.back').addEventListener('click', () => {
-  numbersOne.pop();
-  screenNumber = Number(numbersOne.join(''));
-  screen.textContent = screenNumber;
+  if (mem === null) {
+    console.log(numbersOne);
+    mem = numbersOne.pop();
+    screenNumber = Number(numbersOne.join(''));
+    screen.textContent = screenNumber;
+  } else {
+    numbersTwo.pop();
+    screenNumber = Number(numbersTwo.join(''));
+    screen.textContent = screenNumber;
+  }
 });
