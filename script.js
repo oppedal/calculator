@@ -12,7 +12,7 @@ let num2 = null;
 let doMath;
 let numbersOne = [];
 let numbersTwo = [];
-let total;
+let total = [];
 let finished = false;
 let btn__num;
 let mem = null;
@@ -26,7 +26,7 @@ const reset = () => {
   doMath = '';
   numbersOne = [];
   numbersTwo = [];
-  total;
+  total = [];
   mem = null;
   maxNum = [];
   maxNumTwo = [];
@@ -53,19 +53,14 @@ const operate = (num1, num2) => {
 const calc = () => {
   screen.textContent = ``;
   if (mem === null) {
-    console.log((screen.textContent = `${num1} ${symbol}`));
-    console.log(symbol);
     if (num1 !== null) {
       screen.textContent = `${num1} ${symbol} `;
       mem = operate(num1, num2);
     }
   } else if (mem !== null) {
-    num1 = mem;
-
-    // mem = operate(num1, num2);
-    screen.textContent = mem;
+    num1 = Math.round(mem * 10) / 10;
+    screen.textContent = Math.round(mem * 10) / 10;
   }
-
   numbersTwo = [];
   numbersOne = [];
 };
@@ -85,14 +80,11 @@ btn__numbers.forEach((button) => {
         numbersTwo.push(btn__num.classList[0]);
         num2 = Number(numbersTwo.join(''));
 
-        // screen.textContent = num2;
         screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
         mem = operate(num1, num2);
         maxNumTwo.push(btn__num.classList[0]);
         scaleFontSize(maxNumTwo);
-      }
-      if (doMath === divide) {
-        console.log(`Divide`);
+        total.push(mem);
       }
     }
   });
@@ -101,21 +93,16 @@ btn__numbers.forEach((button) => {
 document.querySelector('.add').addEventListener('click', () => {
   doMath = add;
   symbol = `+`;
-  // finished ?? reset();
   calc();
-  // console.log(`this is the total ${sum}`);
 });
 document.querySelector('.subtract').addEventListener('click', () => {
   doMath = subtract;
   symbol = `-`;
-  // finished ?? reset();
   calc();
 });
 document.querySelector('.multiply').addEventListener('click', () => {
   doMath = multiply;
   symbol = `*`;
-
-  // finished ?? reset();
   calc();
 });
 document.querySelector('.divide').addEventListener('click', () => {
@@ -123,42 +110,20 @@ document.querySelector('.divide').addEventListener('click', () => {
   symbol = `/`;
   numbersTwo.push(btn__num.classList[0]);
   num2 = Number(numbersTwo.join(''));
-  // screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
-
-  console.log(num2);
-  console.log(`NumberOne arr = ${numbersOne}`);
-  console.log(`NumberTwo arr = ${numbersTwo}`);
-
-  // num2 = screen.textContent;
-  // finished ?? reset();
   calc();
-  // if (num2 !== null) {
-
-  //   screen.textContent = mem;
-  // }
 });
 
 document.querySelector('.equals').addEventListener('click', () => {
-  screen.textContent = mem;
+  total.push(mem);
+  scaleFontSize(total);
+  screen.textContent = Math.round(mem * 10) / 10;
 });
 
 document.querySelector('.clear').addEventListener('click', () => {
   reset();
-  screen.textContent = '';
+  screen.textContent = 'Do maths';
 });
-document.querySelector('.back').addEventListener('click', () => {
-  if (mem === null) {
-    mem = numbersOne.pop();
-    screenNumber = Number(numbersOne.join(''));
-    screen.textContent = screenNumber;
-    maxNum.pop();
-  } else {
-    numbersTwo.pop();
-    screenNumber = Number(numbersTwo.join(''));
-    screen.textContent = screenNumber;
-    maxNumTwo.pop();
-  }
-});
+document.querySelector('.back').addEventListener('click', () => {});
 
 const scaleFontSize = (arr) => {
   screenFont.style.fontSize = `3.2rem`;
