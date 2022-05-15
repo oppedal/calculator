@@ -2,10 +2,6 @@
 const screen = document.querySelector('.screen--txt');
 const btn__numbers = document.querySelectorAll('button');
 const screenFont = document.getElementById(`screenfont`);
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
 
 let num1 = null;
 let num2 = null;
@@ -19,6 +15,11 @@ let mem = null;
 let maxNum = [];
 let maxNumTwo = [];
 let symbol;
+
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
 const reset = () => {
   num1 = null;
