@@ -181,11 +181,14 @@ const scaleFontSize = (arr) => {
 let keyNumber;
 const operatorArr = [`+`, `-`, `/`, `*`];
 const operatorPressed = (e) => {
-  let symbol = e.key;
+  symbol = e.key;
   // console.log(operatorArr);
   operatorArr.forEach((operate) => {
     if (operate === symbol) {
-      console.log(operate);
+      doMath = operatorArr; //Gj;re arr om til arr av objekter
+
+      calc();
+      // screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
     }
   });
 };
