@@ -65,28 +65,66 @@ const calc = () => {
   numbersTwo = [];
   numbersOne = [];
 };
+const numberInputButtons = () => {
+  if (mem === null) {
+    numbersOne.push(btn__num.classList[0]);
+    num1 = Number(numbersOne.join(''));
+    screenNumber = num1;
+    screen.textContent = num1;
+    maxNum.push(btn__num.classList[0]);
+    scaleFontSize(maxNum);
+  } else if (num1 !== null) {
+    numbersTwo.push(btn__num.classList[0]);
+    num2 = Number(numbersTwo.join(''));
 
+    screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
+    mem = operate(num1, num2);
+    maxNumTwo.push(btn__num.classList[0]);
+    scaleFontSize(maxNumTwo);
+    total.push(mem);
+  }
+};
+const numberInputKeyboard = () => {
+  if (mem === null) {
+    numbersOne.push(keyNumber);
+    num1 = Number(numbersOne.join(''));
+    screenNumber = num1;
+    screen.textContent = num1;
+    maxNum.push(keyNumber);
+    scaleFontSize(maxNum);
+  } else if (num1 !== null) {
+    numbersTwo.push(keyNumber);
+    num2 = Number(numbersTwo.join(''));
+
+    screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
+    mem = operate(num1, num2);
+    maxNumTwo.push(keyNumber);
+    scaleFontSize(maxNumTwo);
+    total.push(mem);
+  }
+};
 btn__numbers.forEach((button) => {
   button.addEventListener('click', (e) => {
     btn__num = e.target;
     if (btn__num.classList.contains('numbers')) {
-      if (mem === null) {
-        numbersOne.push(btn__num.classList[0]);
-        num1 = Number(numbersOne.join(''));
-        screenNumber = num1;
-        screen.textContent = num1;
-        maxNum.push(btn__num.classList[0]);
-        scaleFontSize(maxNum);
-      } else if (num1 !== null) {
-        numbersTwo.push(btn__num.classList[0]);
-        num2 = Number(numbersTwo.join(''));
+      numberInputButtons();
+      // if (mem === null) {
+      //   numbersOne.push(btn__num.classList[0]);
+      //   num1 = Number(numbersOne.join(''));
+      //   screenNumber = num1;
+      //   screen.textContent = num1;
+      //   maxNum.push(btn__num.classList[0]);
+      //   scaleFontSize(maxNum);
+      // } else if (num1 !== null) {
+      //   numbersTwo.push(btn__num.classList[0]);
+      //   num2 = Number(numbersTwo.join(''));
 
-        screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
-        mem = operate(num1, num2);
-        maxNumTwo.push(btn__num.classList[0]);
-        scaleFontSize(maxNumTwo);
-        total.push(mem);
-      }
+      //   screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
+      //   mem = operate(num1, num2);
+      //   maxNumTwo.push(btn__num.classList[0]);
+      //   scaleFontSize(maxNumTwo);
+      //   total.push(mem);
+      // }
     }
   });
 });
@@ -137,3 +175,37 @@ const scaleFontSize = (arr) => {
     screenFont.style.fontSize = `3rem`;
   }
 };
+
+//Keyboard
+
+let keyNumber;
+const operatorArr = [`+`, `-`, `/`, `*`];
+const operatorPressed = (e) => {
+  let symbol = e.key;
+  // console.log(operatorArr);
+  operatorArr.forEach((operate) => {
+    if (operate === symbol) {
+      console.log(operate);
+    }
+  });
+};
+const keyPressed = (e) => {
+  // console.log(e);
+  if (
+    (e.keyCode >= 49 && e.keyCode <= 57) ||
+    (e.keyCode >= 97 && e.key <= 105)
+  ) {
+    keyNumber = Number(e.key);
+    numberInputKeyboard();
+  }
+};
+
+// const keyPressedNum = (e) => {
+//   if (e.keyCode >= 97 && e.key <= 105) {
+//     keyNumber = Number(e.key);
+//     numberInputKeyboard();
+//   }
+// };
+// document.addEventListener('keydown', keyPressedNum);
+document.addEventListener('keydown', keyPressed);
+document.addEventListener('keydown', operatorPressed);
