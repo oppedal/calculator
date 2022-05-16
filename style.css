@@ -79,6 +79,11 @@ button {
   transform: 1.2 all;
   transition: ease-in-out;
 }
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .numbers {
   color: #c84d5e;

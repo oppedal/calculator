@@ -192,13 +192,14 @@ let keyNumber;
 // const operatorArr = [`+`, `-`, `/`, `*`];
 
 const operatorPressed = (e) => {
-  symbol = e.key;
   Object.values(operatorObj).map((value) => {
-    if (symbol === value) {
+    if (e.key === value) {
+      symbol = value;
       doMath = getKeyByValue(operatorObj, symbol);
-      console.log(doMath);
+      // console.log(doMath);
       calc();
-      console.log(value);
+      console.log(symbol);
+      console.log(doMath);
     }
   });
 };
