@@ -166,6 +166,13 @@ document.querySelector('.clear').addEventListener('click', () => {
   screen.textContent = 'Do maths';
   scaleFontSize(numbersOne);
 });
+const clearAll = (e) => {
+  if (e.key === `Escape` || e.key === `Delete`) {
+    reset();
+    screen.textContent = 'Do maths';
+    scaleFontSize(numbersOne);
+  }
+};
 
 const scaleFontSize = (arr) => {
   screenFont.style.fontSize = `3.2rem`;
@@ -224,10 +231,13 @@ const keyPressed = (e) => {
 };
 const equalsPressed = (e) => {
   if (e.keyCode === 61 || e.keyCode === 13) {
+    console.log(doMath);
+
+    mem = operate(num1, num2);
     console.log(`Mem on equals pressed ${mem}`);
     total.push(mem);
     scaleFontSize(total);
-    screen.textContent = Math.round(mem * 10) / 10;
+    screen.textContent = `tor + kukk + anus`;
     // screen.textContent = Math.round(mem * 10) / 10;
   }
 };
@@ -242,3 +252,4 @@ document.addEventListener('keydown', operatorPressed);
 document.addEventListener('keydown', equalsPressed);
 document.querySelector('.back').addEventListener('click', back);
 document.addEventListener('keydown', backspace);
+document.addEventListener('keydown', clearAll);
