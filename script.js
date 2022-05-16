@@ -79,6 +79,7 @@ const numberInputButtons = () => {
 
     screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
     mem = operate(num1, num2);
+    console.log(`Buttons mem ${mem}`);
     maxNumTwo.push(btn__num.classList[0]);
     scaleFontSize(maxNumTwo);
     total.push(mem);
@@ -90,17 +91,36 @@ const numberInputKeyboard = () => {
     num1 = Number(numbersOne.join(''));
     screenNumber = num1;
     screen.textContent = num1;
+    //Push numbers to check length of string
     maxNum.push(keyNumber);
     scaleFontSize(maxNum);
   } else if (num1 !== null) {
+    mem = `Hello memory`;
     numbersTwo.push(keyNumber);
     num2 = Number(numbersTwo.join(''));
 
     screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
-    mem = operate(num1, num2);
+    // mem = operate(num1, num2);
+
+    //Push numbers to check length of string
     maxNumTwo.push(keyNumber);
     scaleFontSize(maxNumTwo);
     total.push(mem);
+  }
+};
+const back = () => {
+  if (mem === null) {
+    numbersOne.pop();
+    num1 = Number(numbersOne.join(''));
+    screenNumber = num1;
+    screen.textContent = num1;
+    scaleFontSize(numbersOne);
+  } else {
+    numbersTwo.pop();
+    num2 = Number(numbersTwo.join(''));
+    scaleFontSizeNumTwo(numbersTwo);
+
+    screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
   }
 };
 btn__numbers.forEach((button) => {
@@ -146,13 +166,23 @@ document.querySelector('.clear').addEventListener('click', () => {
   screen.textContent = 'Do maths';
   scaleFontSize(numbersOne);
 });
-document.querySelector('.back').addEventListener('click', () => {});
 
 const scaleFontSize = (arr) => {
   screenFont.style.fontSize = `3.2rem`;
   if (arr.length >= 5) {
     screenFont.style.fontSize = `2rem`;
     if (arr.length >= 13) {
+      screenFont.style.fontSize = `1.5rem`;
+    }
+  } else if (arr.length === 0) {
+    screenFont.style.fontSize = `3rem`;
+  }
+};
+const scaleFontSizeNumTwo = (arr) => {
+  screenFont.style.fontSize = `3.2rem`;
+  if (arr.length > 3) {
+    screenFont.style.fontSize = `2rem`;
+    if (arr.length >= 7) {
       screenFont.style.fontSize = `1.5rem`;
     }
   } else if (arr.length === 0) {
@@ -172,17 +202,13 @@ const getKeyByValue = (object, symbol) => {
 };
 
 let keyNumber;
-// const operatorArr = [`+`, `-`, `/`, `*`];
 
 const operatorPressed = (e) => {
   Object.values(operatorObj).map((value) => {
     if (e.key === value) {
       symbol = value;
       doMath = getKeyByValue(operatorObj, symbol);
-      // console.log(doMath);
-      console.log(calc());
-      // console.log(symbol);
-      // console.log(doMath);
+      calc();
     }
   });
 };
@@ -197,14 +223,22 @@ const keyPressed = (e) => {
   }
 };
 const equalsPressed = (e) => {
-  // console.log(e);
   if (e.keyCode === 61 || e.keyCode === 13) {
-    // console.log(mem);
-    // total.push(mem);
-    // scaleFontSize(total);
+    console.log(`Mem on equals pressed ${mem}`);
+    total.push(mem);
+    scaleFontSize(total);
     screen.textContent = Math.round(mem * 10) / 10;
+    // screen.textContent = Math.round(mem * 10) / 10;
+  }
+};
+
+const backspace = (e) => {
+  if (e.key === `Backspace`) {
+    back();
   }
 };
 document.addEventListener('keydown', keyPressed);
 document.addEventListener('keydown', operatorPressed);
 document.addEventListener('keydown', equalsPressed);
+document.querySelector('.back').addEventListener('click', back);
+document.addEventListener('keydown', backspace);
