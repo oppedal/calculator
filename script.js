@@ -161,6 +161,7 @@ document.querySelector('.equals').addEventListener('click', () => {
 document.querySelector('.clear').addEventListener('click', () => {
   reset();
   screen.textContent = 'Do maths';
+  scaleFontSize(numbersOne);
 });
 document.querySelector('.back').addEventListener('click', () => {});
 
@@ -177,23 +178,32 @@ const scaleFontSize = (arr) => {
 };
 
 //Keyboard
+const operatorObj = {
+  add: `+`,
+  subtract: `-`,
+  divide: `/`,
+  multiply: `*`,
+};
+const getKeyByValue = (object, symbol) => {
+  return Object.keys(object).find((key) => object[key] === symbol);
+};
 
 let keyNumber;
-const operatorArr = [`+`, `-`, `/`, `*`];
+// const operatorArr = [`+`, `-`, `/`, `*`];
+
 const operatorPressed = (e) => {
   symbol = e.key;
-  // console.log(operatorArr);
-  operatorArr.forEach((operate) => {
-    if (operate === symbol) {
-      doMath = operatorArr; //Gj;re arr om til arr av objekter
-
+  Object.values(operatorObj).map((value) => {
+    if (symbol === value) {
+      doMath = getKeyByValue(operatorObj, symbol);
+      console.log(doMath);
       calc();
-      // screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
+      console.log(value);
     }
   });
 };
+
 const keyPressed = (e) => {
-  // console.log(e);
   if (
     (e.keyCode >= 49 && e.keyCode <= 57) ||
     (e.keyCode >= 97 && e.key <= 105)
@@ -203,12 +213,5 @@ const keyPressed = (e) => {
   }
 };
 
-// const keyPressedNum = (e) => {
-//   if (e.keyCode >= 97 && e.key <= 105) {
-//     keyNumber = Number(e.key);
-//     numberInputKeyboard();
-//   }
-// };
-// document.addEventListener('keydown', keyPressedNum);
 document.addEventListener('keydown', keyPressed);
 document.addEventListener('keydown', operatorPressed);
