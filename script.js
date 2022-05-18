@@ -95,7 +95,7 @@ const numberInputKeyboard = () => {
     maxNum.push(keyNumber);
     scaleFontSize(maxNum);
   } else if (num1 !== null) {
-    mem = `Hello memory`;
+    mem = num1;
     numbersTwo.push(keyNumber);
     num2 = Number(numbersTwo.join(''));
 
@@ -233,11 +233,13 @@ const equalsPressed = (e) => {
   if (e.keyCode === 61 || e.keyCode === 13) {
     console.log(doMath);
 
-    mem = operate(num1, num2);
     console.log(`Mem on equals pressed ${mem}`);
     total.push(mem);
     scaleFontSize(total);
-    screen.textContent = `tor + kukk + anus`;
+    console.log(`num1: ${num1} num2: ${num2}`);
+    console.log(total);
+    console.log(mem);
+    numberInputKeyboard();
     // screen.textContent = Math.round(mem * 10) / 10;
   }
 };
