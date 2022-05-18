@@ -25,8 +25,10 @@
   display: grid;
   grid-template-rows: 200px 300px;
   padding: 1rem;
-  width: 418px;
+  width: 100vw;
+  max-width: 418px;
   height: 608px;
+  max-height: 40em;
   margin-top: 5em;
   border-radius: 41px;
   padding-top: 2em;
@@ -44,8 +46,6 @@
   background-color: #97b6d6;
   border-radius: 22px;
   margin-bottom: 1rem;
-  height: 150px;
-  width: 380px;
   box-shadow: 3px 0px 0px 0px inset rgba(0, 0, 0, 0.568);
 }
 .screen--txt {
