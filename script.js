@@ -76,10 +76,8 @@ const numberInputButtons = () => {
   } else if (num1 !== null) {
     numbersTwo.push(btn__num.classList[0]);
     num2 = Number(numbersTwo.join(''));
-
     screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
     mem = operate(num1, num2);
-    console.log(`Buttons mem ${mem}`);
     maxNumTwo.push(btn__num.classList[0]);
     scaleFontSize(maxNumTwo);
     total.push(mem);
@@ -95,13 +93,10 @@ const numberInputKeyboard = () => {
     maxNum.push(keyNumber);
     scaleFontSize(maxNum);
   } else if (num1 !== null) {
-    mem = num1;
     numbersTwo.push(keyNumber);
     num2 = Number(numbersTwo.join(''));
-
     screen.textContent = `${num1} ${symbol} ${num2 !== null ? num2 : ``}`;
-    // mem = operate(num1, num2);
-
+    mem = operate(num1, num2);
     //Push numbers to check length of string
     maxNumTwo.push(keyNumber);
     scaleFontSize(maxNumTwo);
@@ -231,15 +226,9 @@ const keyPressed = (e) => {
 };
 const equalsPressed = (e) => {
   if (e.keyCode === 61 || e.keyCode === 13) {
-    console.log(doMath);
-
-    console.log(`Mem on equals pressed ${mem}`);
     total.push(mem);
     scaleFontSize(total);
-    console.log(`num1: ${num1} num2: ${num2}`);
-    console.log(total);
-    console.log(mem);
-    numberInputKeyboard();
+
     // screen.textContent = Math.round(mem * 10) / 10;
   }
 };
